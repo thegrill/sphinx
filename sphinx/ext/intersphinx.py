@@ -316,7 +316,7 @@ def missing_reference(app, env, node, contnode):
                 # get correct path in case of subdirectories
                 uri = path.join(relative_path(node['refdoc'], '.'), uri)
             newnode = nodes.reference('', '', internal=False, refuri=uri,
-                                      reftitle=_('(in %s v%s)') % (proj, version))
+                                      reftitle=_('%s') % (full_qualified_name))
             if node.get('refexplicit'):
                 # use whatever title was given
                 newnode.append(contnode)
