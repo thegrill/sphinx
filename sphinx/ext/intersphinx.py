@@ -317,7 +317,6 @@ def missing_reference(app, env, node, contnode):
                 uri = path.join(relative_path(node['refdoc'], '.'), uri)
             newnode = nodes.reference('', '', internal=False, refuri=uri,
                                       reftitle=_('%s') % (full_qualified_name))
-            logger.info(f'found {full_qualified_name} inventory with uri: {uri}')
             if node.get('refexplicit'):
                 # use whatever title was given
                 newnode.append(contnode)
