@@ -39,7 +39,6 @@ r"""
 import re
 import sys
 import inspect
-import logging
 try:
     from hashlib import md5
 except ImportError:
@@ -63,7 +62,7 @@ if False:
     from sphinx.application import Sphinx  # NOQA
     from sphinx.environment import BuildEnvironment  # NOQA
 
-logger = logging.getLogger(__name__)
+
 module_sig_re = re.compile(r'''^(?:([\w.]*)\.)?  # module names
                            (\w+)  \s* $          # class/final module name
                            ''', re.VERBOSE)
@@ -386,9 +385,6 @@ def html_visit_inheritance_diagram(self, node):
     current_filename = self.builder.current_docname + self.builder.out_suffix
     urls = {}
     for child in node:
-        logger.info(f'Visiting {child}')
-        refuri = child.get('refuri')
-        logger.info(f'Got refuri {refuri}')
         if child.get('refuri') is not None:
             if graphviz_output_format == 'SVG':
                 urls[child['reftitle']] = "../" + child.get('refuri')
