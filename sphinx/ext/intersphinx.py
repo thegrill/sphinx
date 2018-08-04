@@ -313,6 +313,7 @@ def missing_reference(app: Sphinx, env: BuildEnvironment, node: Element, contnod
                 reftitle = _('(in %s v%s)') % (proj, version)
             else:
                 reftitle = _('(in %s)') % (proj,)
+            reftitle = target  # otherwise we loose clickability on the generated inheritance diagram
             newnode = nodes.reference('', '', internal=False, refuri=uri, reftitle=reftitle)
             if node.get('refexplicit'):
                 # use whatever title was given
