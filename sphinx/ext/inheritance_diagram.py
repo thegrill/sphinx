@@ -406,8 +406,9 @@ def html_visit_inheritance_diagram(self: HTMLTranslator, node: inheritance_diagr
     pending_xrefs = cast(Iterable[addnodes.pending_xref], node)
     for child in pending_xrefs:
         if child.get('refuri') is not None:
-            if graphviz_output_format == 'SVG':
-                urls[child['reftitle']] = "../" + child.get('refuri')
+            if graphviz_output_format == 'SVG' and '://' not in child.get('refuri'):
+                # we are local, consider relative html uri to the current filename
+                urls[child['reftitle']] = "../" + current_filename.rsplit("/", 1)[0] + "/" + child.get('refuri')
             else:
                 urls[child['reftitle']] = child.get('refuri')
         elif child.get('refid') is not None:
